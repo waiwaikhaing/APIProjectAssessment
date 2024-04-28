@@ -12,23 +12,23 @@ namespace APIProjectAssessment.Services
             _dbContext = appDBContext;
         }
 
-        public async Task<int> AddInfo(InfoModel infoModel)
+        public async Task<int> AddInfo(AddressModel AddressModel)
         {
             var res = 0;
             try
             {
-                if (infoModel != null)
+                if (AddressModel != null)
                 {
                     DataDetailModel dataDetailModel = new DataDetailModel();
-                    dataDetailModel.DataType = infoModel.dataType;
-                    dataDetailModel.Humidity = infoModel.data.humidity;
-                    dataDetailModel.Temperature = infoModel.data.temperature;
-                    dataDetailModel.Occupancy = infoModel.data.occupancy;
-                    dataDetailModel.DeviceId = infoModel.deviceId;
-                    dataDetailModel.DeviceName = infoModel.deviceName;
-                    dataDetailModel.GroupId = infoModel.groupId;
-                    dataDetailModel.DeviceType = infoModel.deviceType;
-                    dataDetailModel.Timestamp = infoModel.timestamp;
+                    dataDetailModel.DataType = AddressModel.dataType;
+                    dataDetailModel.Humidity = AddressModel.data.humidity;
+                    dataDetailModel.Temperature = AddressModel.data.temperature;
+                    dataDetailModel.Occupancy = AddressModel.data.occupancy;
+                    dataDetailModel.DeviceId = AddressModel.deviceId;
+                    dataDetailModel.DeviceName = AddressModel.deviceName;
+                    dataDetailModel.GroupId = AddressModel.groupId;
+                    dataDetailModel.DeviceType = AddressModel.deviceType;
+                    dataDetailModel.Timestamp = AddressModel.timestamp;
 
                     await _dbContext.dataDetails.AddAsync(dataDetailModel);
                     res = await _dbContext.SaveChangesAsync();

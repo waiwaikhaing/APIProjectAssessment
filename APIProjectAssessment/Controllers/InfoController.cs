@@ -19,7 +19,7 @@ namespace APIProjectAssessment.Controllers
             _dbContext = appDBContext;
         }
         [HttpPost]
-        public async Task<IActionResult> AddData(InfoModel infoModel)
+        public async Task<IActionResult> AddData(AddressModel AddressModel)
         {
 
             OurApi_BaseResponseModel model = new OurApi_BaseResponseModel();
@@ -27,11 +27,11 @@ namespace APIProjectAssessment.Controllers
             {
                 InfoService _service = new InfoService(_dbContext);
 
-                var payloadJson = JsonConvert.SerializeObject(infoModel);
+                var payloadJson = JsonConvert.SerializeObject(AddressModel);
                 string msg = "Received Payload :" + DateTime.Now + ">>>>" + payloadJson;
                 General.WriteLogInTextFile(msg);
 
-                var item = await _service.AddInfo(infoModel);
+                var item = await _service.AddInfo(AddressModel);
                 if (item == 0)
                 {
                     model.Response = new OurApi_ResponseModel

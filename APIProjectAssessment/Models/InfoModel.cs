@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace APIProjectAssessment.Models
 {
-    //public class InfoModel
+    //public class AddressModel
     //{
     //}
     public class Data
@@ -20,7 +20,7 @@ namespace APIProjectAssessment.Models
         public int stateChanged { get; set; }
     }
 
-    public class InfoModel
+    public class AddressModel
     {
         public string? deviceId { get; set; }
         public string? deviceType { get; set; }

@@ -14,6 +14,7 @@ namespace APIProjectAssessment.EFDBContext
         }
 
         public DbSet<DataDetailModel> dataDetails { get; set; }
+        public DbSet<AddressLocationModel> addresses { get; set; }
 
     }
 }
