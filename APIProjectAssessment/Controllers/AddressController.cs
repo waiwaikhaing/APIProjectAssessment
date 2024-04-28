@@ -23,6 +23,7 @@ namespace APIProjectAssessment.Controllers
             OurApi_BaseResponseModel model = new OurApi_BaseResponseModel();
             try
             {
+                int item = 0;
                 AddressService _service = new AddressService(_dbContext);
                 AddressLocationModel addressModel = new AddressLocationModel();
                 if (addr != null)
@@ -34,23 +35,23 @@ namespace APIProjectAssessment.Controllers
                         addressModel.Name = parts[i];
                         if (i == 0)  beforeIndexValue = ""; 
                         else beforeIndexValue = parts[i - 1];
-                        var item = await _service.AddAddress(addressModel, beforeIndexValue);
+                         item = await _service.AddAddress(addressModel, beforeIndexValue);
                     }
                 }
-                //if (item == 0)
-                //{
-                //    model.Response = new OurApi_ResponseModel
-                //    {
-                //        RespType = EnumRespType.Information,
-                //        RespDesp = "Saving Failed."
-                //    };
-                //    goto result;
-                //}
-                //model.Response = new OurApi_ResponseModel
-                //{
-                //    RespType = EnumRespType.Success,
-                //    RespDesp = "Saving Success."
-                //};
+                if (item == 0)
+                {
+                    model.Response = new OurApi_ResponseModel
+                    {
+                        RespType = EnumRespType.Information,
+                        RespDesp = "Saving Failed."
+                    };
+                    goto result;
+                }
+                model.Response = new OurApi_ResponseModel
+                {
+                    RespType = EnumRespType.Success,
+                    RespDesp = "Saving Success."
+                };
             }
             catch (Exception ex)
             {

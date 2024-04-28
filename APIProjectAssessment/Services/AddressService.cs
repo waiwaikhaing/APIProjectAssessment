@@ -13,7 +13,7 @@ namespace APIProjectAssessment.Services
             _dbContext = appDBContext;
         }
 
-        public async Task<int> AddAddress(AddressLocationModel addressModel,string parentNode)
+        public async Task<int> AddAddress(AddressLocationModel addressModel, string parentNode)
         {
             var res = 0;
             AddressLocationModel parent = null;
@@ -22,40 +22,23 @@ namespace APIProjectAssessment.Services
             {
                 if (addressModel != null)
                 {
-                    if (parentNode != "" && parentNode != null) { 
+                    if (parentNode != "" && parentNode != null)
+                    {
                         parent = await _dbContext.addresses.FirstOrDefaultAsync(x => x.Name == parentNode);
 
-
-                        //if (parent == null)
-                        //{
-                        //    AddressLocationModel parNode = new AddressLocationModel();
-                        //    parNode.Name = parentNode;
-                        //    await _dbContext.addresses.AddAsync(parNode);
-                        //    res = await _dbContext.SaveChangesAsync();
-
-                        //    parent = await _dbContext.addresses.FirstOrDefaultAsync(x => x.Name == parentNode);
-                        //}
-
-                        //if (addressModel != null)
-                        //{
-                        //    childNode = await _dbContext.addresses.FirstOrDefaultAsync
-                        //        (x => x.Name == addressModel.Name && x.ParentID == parent.AddressID);
-                        //}
                     }
-                   
-                    if(parent != null)
+
+                    if (parent != null)
                     {
                         addressModel.ParentID = parent.AddressID;
-                        childNode = await _dbContext.addresses.FirstOrDefaultAsync
-                            (x => x.Name == addressModel.Name && x.ParentID == parent.AddressID);
+                        childNode = await _dbContext.addresses.FirstOrDefaultAsync(x => x.Name == addressModel.Name && x.ParentID == parent.AddressID);
 
                     }
-                    if(childNode == null)
+                    if (childNode == null)
                     {
                         if (parentNode == "")
                         {
-                            childNode = await _dbContext.addresses.FirstOrDefaultAsync
-                            (x => x.Name == addressModel.Name);
+                            childNode = await _dbContext.addresses.FirstOrDefaultAsync(x => x.Name == addressModel.Name);
                             if (childNode == null)
                             {
                                 addressModel.AddressID = 0;
@@ -70,7 +53,6 @@ namespace APIProjectAssessment.Services
                             res = await _dbContext.SaveChangesAsync();
                         }
                     }
-                   
                 }
             }
             catch (Exception ex)
