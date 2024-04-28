@@ -12,3 +12,11 @@ CREATE TABLE Tbl_DataDetail (
 );
 
 --drop table Tbl_DataDetail
+
+
+CREATE TABLE Tbl_Address (
+    AddressID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100),
+    ParentID INT,
+    FOREIGN KEY (ParentID) REFERENCES Tbl_Address(AddressID)
+);
